@@ -17,41 +17,37 @@ class LeaveReviewAction extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: Read from data source
     final purchase = Purchase(orderId: 'abc', orderDate: DateTime.now());
-    if (purchase != null) {
-      // TODO: Inject date formatter
-      final dateFormatted = kDateFormatter.format(purchase.orderDate);
-      return Column(
-        children: [
-          const Divider(),
-          gapH8,
-          ResponsiveTwoColumnLayout(
-            spacing: Sizes.p16,
-            breakpoint: 300,
-            startFlex: 3,
-            endFlex: 2,
-            rowMainAxisAlignment: MainAxisAlignment.spaceBetween,
-            rowCrossAxisAlignment: CrossAxisAlignment.center,
-            columnCrossAxisAlignment: CrossAxisAlignment.center,
-            startContent: Text('Purchased on $dateFormatted'.hardcoded),
-            endContent: CustomTextButton(
-              text: 'Leave a review'.hardcoded,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyLarge!
-                  .copyWith(color: Colors.green[700]),
-              onPressed: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  fullscreenDialog: true,
-                  builder: (_) => LeaveReviewScreen(productId: productId),
-                ),
+    // TODO: Inject date formatter
+    final dateFormatted = kDateFormatter.format(purchase.orderDate);
+    return Column(
+      children: [
+        const Divider(),
+        gapH8,
+        ResponsiveTwoColumnLayout(
+          spacing: Sizes.p16,
+          breakpoint: 300,
+          startFlex: 3,
+          endFlex: 2,
+          rowMainAxisAlignment: MainAxisAlignment.spaceBetween,
+          rowCrossAxisAlignment: CrossAxisAlignment.center,
+          columnCrossAxisAlignment: CrossAxisAlignment.center,
+          startContent: Text('Purchased on $dateFormatted'.hardcoded),
+          endContent: CustomTextButton(
+            text: 'Leave a review'.hardcoded,
+            style: Theme.of(context)
+                .textTheme
+                .bodyLarge!
+                .copyWith(color: Colors.green[700]),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                fullscreenDialog: true,
+                builder: (_) => LeaveReviewScreen(productId: productId),
               ),
             ),
           ),
-          gapH8,
-        ],
-      );
-    } else {
-      return const SizedBox();
-    }
+        ),
+        gapH8,
+      ],
+    );
   }
 }

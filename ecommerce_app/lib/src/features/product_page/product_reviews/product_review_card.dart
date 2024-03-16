@@ -31,7 +31,8 @@ class ProductReviewCard extends StatelessWidget {
                     showNotImplementedAlertDialog(context: context);
                   },
                 ),
-                Text(dateFormatted, style: Theme.of(context).textTheme.bodySmall),
+                Text(dateFormatted,
+                    style: Theme.of(context).textTheme.bodySmall),
               ],
             ),
             if (review.comment.isNotEmpty) ...[

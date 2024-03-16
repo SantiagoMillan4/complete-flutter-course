@@ -1,17 +1,19 @@
+import 'package:ecommerce_app/src/features/product_page/product_screen.dart';
 import 'package:ecommerce_app/src/features/products_list/products_list_screen.dart';
 import 'package:ecommerce_app/src/localization/string_hardcoded.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: _router,
       debugShowCheckedModeBanner: false,
       restorationScopeId: 'app',
       // * The home page of the app
-      home: const ProductsListScreen(),
       onGenerateTitle: (BuildContext context) => 'My Shop'.hardcoded,
       theme: ThemeData(
         // * Use this to toggle Material 3 (defaults to true since Flutter 3.16)
@@ -32,3 +34,27 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+final GoRouter _router = GoRouter(
+  initialLocation: '/',
+  debugLogDiagnostics: true,
+  routes: [
+    GoRoute(
+      path: '/',
+      builder: (BuildContext context, GoRouterState state) {
+        return const ProductsListScreen();
+      },
+      routes: [
+        GoRoute(
+          path: 'product',
+          name: 'product',
+          builder: (BuildContext context, GoRouterState state) {
+            final productId =
+                state.uri.queryParameters['productId'] ?? 'defaultProductId';
+            return ProductScreen(productId: productId);
+          },
+        ),
+      ],
+    ),
+  ],
+);

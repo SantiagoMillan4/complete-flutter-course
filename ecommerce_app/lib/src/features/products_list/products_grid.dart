@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:ecommerce_app/src/constants/app_sizes.dart';
 import 'package:ecommerce_app/src/features/products_list/product_card.dart';
+import 'package:go_router/go_router.dart';
 
 /// A widget that displays the list of products that match the search query.
 class ProductsGrid extends StatelessWidget {
@@ -29,11 +30,10 @@ class ProductsGrid extends StatelessWidget {
               final product = products[index];
               return ProductCard(
                 product: product,
-                onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => ProductScreen(productId: product.id),
-                  ),
-                ),
+                onPressed: () {
+                  context.goNamed('product',
+                      queryParameters: {'productId': product.id});
+                },
               );
             },
           );
