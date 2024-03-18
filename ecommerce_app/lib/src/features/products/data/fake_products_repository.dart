@@ -1,19 +1,11 @@
-import 'package:ecommerce_app/src/features/products/domain/product.dart';
 import 'package:ecommerce_app/src/constants/test_products.dart';
+import 'package:ecommerce_app/src/features/products/domain/product.dart';
 
 class FakeProductsRepository {
-  //Created a singleton
-  FakeProductsRepository._internal();
+  FakeProductsRepository._();
+  static FakeProductsRepository instance = FakeProductsRepository._();
 
-  static final FakeProductsRepository _instance =
-      FakeProductsRepository._internal();
-
-  factory FakeProductsRepository() {
-    return _instance;
-  }
-  // end singleton
-
-  final _products = kTestProducts;
+  final List<Product> _products = kTestProducts;
 
   List<Product> getProductsList() {
     return _products;
